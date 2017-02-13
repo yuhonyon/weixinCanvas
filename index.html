@@ -1,0 +1,846 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="user-scalable=no">
+    <title>Examples</title>
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <script>
+    var match,
+        scale,
+        TARGET_WIDTH = 320;
+
+    if (match = navigator.userAgent.match(/Android (\d+\.\d+)/)) {
+        if (parseFloat(match[1]) < 4.4) {
+            if (TARGET_WIDTH == 320) TARGET_WIDTH++;
+            var scale = window.screen.width / TARGET_WIDTH;
+            document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=' + TARGET_WIDTH + ', initial-scale = ' + scale + ', target-densitydpi=device-dpi');
+        }
+    } else {
+        document.querySelector('meta[name="viewport"]').setAttribute('content', 'width=' + TARGET_WIDTH);
+    }
+    </script>
+    <script src="js/fabric.min.js"></script>
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+    #canvas {
+        background: #333;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="320" height="480"></canvas>
+</body>
+<script>
+var canvas = new fabric.Canvas('canvas', {
+    hoverCursor: 'pointer',
+    selection: false
+});
+fabric.Object.prototype.originX = fabric.Object.prototype.originY = 'center';
+fabric.Object.prototype.selectable = false;
+
+var actor = new fabric.Circle({
+    top: 280,
+    left: 160,
+    radius: 6,
+    hoverCursor: 'pointer',
+    fill: '#13F704',
+    strokeWidth: 0,
+    stroke: 'rgba(19,247,4,.3)'
+});
+
+
+var hand = new fabric.Path("M394.791936 971.935744c-10.99264 0-20.890624-6.638592-25.048064-16.787456-0.305152-0.719872-14.30528-33.702912-75.62752-139.4176-34.026496-58.625024-58.930176-117.141504-80.882688-168.747008-19.2-45.147136-37.31968-87.774208-58.768384-124.374016-15.942656-27.242496-16.861184-57.184256-2.555904-82.158592 16.608256-28.972032 51.84-47.684608 89.790464-47.684608 22.582272 0 43.508736 6.26176 61.539328 17.83296l3.058688-254.614528c0.935936-35.555328 21.809152-102.079488 94.162944-102.079488 27.27936 0.395264 48.9984 9.464832 64.454656 26.235904 25.730048 27.90912 25.710592 67.33312 25.334784 76.474368l3.149824 114.044928c11.712512-5.091328 25.101312-7.718912 39.963648-7.718912 37.94944 0.413696 65.118208 11.803648 82.123776 33.936384 3.85024 4.984832 6.890496 10.167296 9.266176 15.384576 14.09024-6.33344 30.357504-9.105408 50.276352-7.647232 27.169792 1.906688 49.555456 12.758016 64.759808 31.381504 7.05536 8.690688 12.09344 18.408448 15.599616 28.466176 14.665728-6.51264 31.922176-7.936 50.419712-3.815424 66.902016 14.8992 79.40608 84.64384 76.690432 120.633344l0.234496 107.838464c0.145408 4.514816 3.111936 130.311168-70.322176 255.44192-50.09408 85.382144-61.106176 105.46176-63.500288 110.031872-1.024 2.680832-2.518016 5.236736-4.425728 7.539712-5.470208 6.565888-14.000128 10.363904-22.472704 9.751552L394.791936 971.935744 394.791936 971.935744zM241.69984 446.90944c-18.299904 0-35.898368 8.438784-42.80832 20.476928-4.642816 8.116224-3.88608 17.23904 2.321408 27.872256 23.176192 39.58784 41.962496 83.7632 61.863936 130.52928 22.38464 52.614144 45.524992 107.02848 77.879296 162.75456 40.772608 70.283264 61.287424 109.508608 71.020544 129.24928l295.407616-0.054272c8.940544-16.067584 25.836544-45.236224 58.317824-100.56704 65.624064-111.833088 62.942208-226.040832 62.906368-227.173376l-0.251904-109.710336c0-0.828416 0.03584-1.619968 0.106496-2.429952 0.16384-2.157568 3.868672-55.817216-34.419712-64.346112-3.132416-0.70144-6.081536-1.043456-8.710144-1.043456-4.389888 0-17.634304 0-24.741888 27.656192-1.296384 9.068544-2.681856 14.737408-2.681856 14.737408-3.382272 13.712384-16.770048 22.509568-30.606336 20.332544-13.945856-2.267136-23.805952-14.754816-22.708224-28.790784 0.090112-1.241088 0.664576-7.573504 2.69824-16.30208 3.273728-26.218496-0.234496-48.54784-9.463808-59.865088-3.617792-4.462592-10.31168-10.45504-26.57792-11.606016-21.753856-1.475584-36.616192 2.321408-39.549952 29.924352l1.061888 26.1632c0.576512 14.125056-9.826304 26.344448-23.896064 27.963392-14.017536 1.92512-27.010048-7.754752-29.725696-21.664768-0.32256-1.619968-2.988032-15.889408-1.71008-33.738752l-0.684032-16.932864c-0.106496-2.609152 0.180224-5.218304 0.809984-7.737344l0 0c0 0 4.463616-20.657152-5.092352-32.874496-8.00768-10.18368-25.229312-12.486656-38.274048-12.63104l-0.017408 0c-17.27488 0-33.199104 4.246528-38.525952 34.349056l1.492992 53.711872c0.396288 14.017536-9.950208 26.002432-23.860224 27.65824-13.981696 1.88928-26.79296-7.575552-29.708288-21.286912-0.251904-1.313792-6.513664-31.471616-2.19648-63.465472l-5.291008-191.023104c-0.036864-0.864256-0.018432-1.709056 0.03584-2.555904 0.361472-6.675456-0.917504-26.846208-11.119616-37.786624-5.28896-5.650432-13.028352-8.493056-23.68-8.619008l0 0c-38.524928 0-40.757248 43.905024-40.900608 48.925696l-3.92192 329.450496c-0.162816 12.973056-9.501696 24.022016-22.27712 26.343424-12.703744 2.212864-25.389056-4.76672-30.067712-16.877568C287.062016 451.695616 254.78144 446.90944 241.69984 446.90944L241.69984 446.90944z")
+hand.set({
+    fill: "#1E5A1A",
+    left: 110,
+    top: 110,
+    evented: false,
+}).scale(.02);
+
+var hand_circle = new fabric.Circle({
+    top: 0,
+    left: 0,
+    radius: 0,
+    fill: '',
+    evented: false,
+    strokeWidth: 2,
+    stroke: '#1E5A1A'
+});
+
+
+
+function actor_animate(obj) {
+    obj.setStrokeWidth(0).animate('strokeWidth', 15, {
+        duration: 1000,
+        onComplete: function() {
+            obj.animate('strokeWidth', 0, {
+                duration: 1000,
+                onComplete: function() {
+                    actor_animate(obj)
+                },
+                easing: function(t, b, c, d) {
+                    return c * t / d + b
+                }
+            });
+        },
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+}
+
+
+
+function anim_largen(obj, rds) {
+    obj.setRadius(0).animate('radius', rds, {
+        duration: 1000,
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+}
+
+
+function anim_rotate(obj, direction) {
+    obj.setAngle(0).animate('angle', 360 * direction, {
+        duration: 10000,
+        onComplete: function() {
+            anim_rotate(obj, direction)
+        },
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+}
+
+function anim_hand() {
+    hand.setLeft(actor.left + 2)
+        .setTop(actor.top + 18)
+        .setOpacity(0)
+        .animate({
+            'top': actor.top + 8,
+            'opacity': 1
+        }, {
+            duration: 1000,
+            onComplete: function() {
+                hand_circle.setLeft(actor.left)
+                    .setTop(actor.top)
+                    .setOpacity(1)
+                    .setRadius(0)
+                    .animate({
+                        'radius': 6,
+                        'opacity': 0
+                    }, {
+                        duration: 800,
+                        onComplete: function() {
+                            anim_hand();
+                        },
+                        easing: function(t, b, c, d) {
+                            return c * t / d + b
+                        }
+                    });
+
+            },
+            easing: function(t, b, c, d) {
+                return c * t / d + b
+            }
+        })
+}
+
+function handFn() {
+    anim_hand();
+    canvas.add(hand_circle);
+    canvas.add(hand);
+}
+
+function handClearFn() {
+    canvas.fxRemove(hand);
+    canvas.fxRemove(hand_circle);
+}
+
+function anim_move(x, y, obj) {
+    obj.animate({
+        'left': x,
+        'top': y
+    }, {
+        duration: 1000,
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+}
+
+var trianglePoints = [{
+    x: 150,
+    y: 0
+}, {
+    x: 0,
+    y: 260
+}, {
+    x: 300,
+    y: 260
+}, ]
+
+function triangleFN(x1, y1, x2, y2, Points, color, sWidth, sArr, direction) {
+    var triangle = new fabric.Polygon(Points, {
+        top: y1,
+        left: x1,
+        fill: '',
+        strokeDashArray: sArr,
+        strokeWidth: sWidth,
+        stroke: color,
+        selectable: true,
+        originX: 150,
+        originY: 175
+
+    });
+
+    canvas.add(triangle);
+    triangle.moveTo(0);
+    anim_rotate(triangle, direction);
+    anim_move(x2, y2, triangle);
+}
+
+
+
+
+
+//坐标,颜色,线宽,线样式,大小,方向
+function arcFn(x, y, color, sWidth, sArr, rds, direction) {
+    var arc = new fabric.Circle({
+        top: y,
+        left: x,
+        radius: 0,
+        fill: false,
+        evented: false,
+        strokeDashArray: sArr,
+        strokeWidth: sWidth,
+        stroke: color
+    });
+    canvas.add(arc);
+    arc.moveTo(0);
+    anim_largen(arc, rds);
+    anim_rotate(arc, direction);
+}
+
+function rand(n, m) {
+    return (parseInt(Math.random() * (m - n) + n))
+}
+
+
+canvas.add(actor);
+actor_animate(actor);
+
+
+var arc_count = 15;
+var arc_style = [
+    [1],
+    [2, 2],
+    [5, 5],
+    [10, 10]
+];
+var arc_size = [20, 30, 50, 80, 85, 90, 110, 114, 120, 125, 128, 135, 150, 155, 158];
+var arc_dir = [-1, 1];
+
+for (var i = 0; i < arc_count; i++) {
+    arcFn(actor.left, actor.top, '#666', rand(1, 3), arc_style[rand(0, 4)], arc_size[i], arc_dir[rand(0, 2)]);
+}
+
+var text1 = new fabric.Text("啊哈哈!啊哈哈!啊哈哈", {
+    top: 100,
+    left: 160,
+    fill: "rgba(255,255,255,0.8)",
+    fontFamily: '微软雅黑',
+    fontSize: 16,
+    fontWeight: 'normal',
+    textAlign: 'center'
+});
+
+text1.setOpacity(0)
+    .animate({
+        'top': 80,
+        'opacity': 1
+    }, {
+        duration: 1000,
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+
+canvas.add(text1)
+
+// triangleFN(620, 800,160,300, trianglePoints, '#666', 2, arc_style[3], -1)
+
+
+function scene2_init() {
+    canvas.clear();
+    canvas.add(actor);
+    setTimeout(scene2, 1600);
+    actor.off("mousedown", scene2_init);
+    text2(160, 225, '那些年我们的芝麻事', 18, 'bold', 'left', "#fff");
+}
+
+
+setTimeout(function() {
+    actor.on("mousedown", scene2_init);
+    handFn()
+}, 1500);
+
+
+
+//场景2
+
+function scene2() {
+    actor.animate({
+        'left': 80,
+        'top': 300
+    }, {
+        duration: 500,
+        onComplete: function() {
+            addpoint();
+        },
+        easing: fabric.util.ease['easeOutBounce']
+    });
+
+
+    function addpoint() {
+        line(actor.left, actor.top, 100, 420);
+        line(actor.left, actor.top, 280, 250);
+        setTimeout(function() {
+            pointFn(100, 420, 2, 150);
+            text(155, 404, '啊哈哈', 16, 'bold', 'left', "#fff");
+            text(182, 442, '是我的第一个朋友\nPS:第啊哈哈啊哈哈?\n<(￣︶￣)>', 12, 'normal', 'left', "#fff");
+            portraitFn()
+        }, 500);
+        setTimeout(function() {
+            pointFn(280, 250, 3, 150);
+            text(237, 195, '2012.5.15', 16, 'bold', 'right', "#fff");
+            text(238, 222, '她追啊哈哈\n我们开啊哈哈', 12, 'normal', 'right', "#fff");
+        }, 500);
+        setTimeout(function() {
+            pointFn(100, 120, 5, 150);
+            text(59, 72, '2016.01.01', 16, 'bold', 'left', "#fff");
+            text(75, 100, '我们啊哈哈\n╭(′▽`)╭(′▽`)╯', 12, 'normal', 'left', "#fff");
+        }, 1000);
+        setTimeout(function() {
+            line(280, 250, 100, 120);
+        }, 500);
+        setTimeout(function() {
+            arcFn(0, 0, '#666', rand(1, 3), arc_style[rand(0, 4)], 150, arc_dir[rand(0, 2)]);
+            arcFn(300, 10, '#666', rand(1, 3), arc_style[rand(0, 4)], 100, arc_dir[rand(0, 2)]);
+            arcFn(100, 100, '#666', rand(1, 3), arc_style[rand(0, 4)], 200, arc_dir[rand(0, 2)]);
+            handFn();
+            actor.on("mousedown", scene3_init);
+        }, 2000)
+
+
+    }
+
+}
+
+
+function portraitFn() {
+
+
+    var portrait = new fabric.Circle({
+        top: 360,
+        left: 160,
+        radius: 30,
+        hoverCursor: 'pointer',
+        strokeWidth: 1,
+        stroke: 'rgba(19,247,4,.3)',
+        opacity: 0
+    });
+    canvas.add(portrait)
+
+    fabric.util.loadImage('http://www.weixinredbao.sinaapp.com/touxiang2.png', function(img) {
+        portrait.fill = new fabric.Pattern({
+            source: img,
+            repeat: 'no-repeat'
+        });
+        canvas.renderAll();
+    });
+
+    portrait.animate({
+        'top': 350,
+        'opacity': 1
+    }, {
+        duration: 500,
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+
+}
+
+
+
+
+
+function scene3_init() {
+
+    canvas.clear();
+    canvas.add(actor);
+    setTimeout(scene3, 100);
+    actor.off("mousedown", scene3_init);
+
+}
+
+function scene3() {
+
+    actor.animate({
+        'left': 160,
+        'top': 280
+    }, {
+        duration: 500,
+        onComplete: function() {
+            text2(160, 225, '那些年我们的芝麻事', 18, 'bold', 'left', "#fff");
+            setTimeout(function() {
+                actor.animate({
+                    'left': 100,
+                    'top': 250
+                }, {
+                    duration: 500,
+                    onComplete: function() {
+                        triangleFN(430, -100, 320, 0, trianglePoints, '#666', 1, arc_style[2], -1);
+                        triangleFN(430, 600, 320, 480, trianglePoints, '#666', 1, arc_style[2], -1);
+                        triangleFN(-100, -100, 0, 0, trianglePoints, '#666', 1, arc_style[2], -1);
+                        triangleFN(-100, 600, 0, 480, trianglePoints, '#666', 1, arc_style[2], -1);
+                        setTimeout(addpoint2, 1000);
+                    },
+                    easing: fabric.util.ease['easeOutBounce']
+                });
+            }, 1000);
+        },
+        easing: fabric.util.ease['easeOutBounce']
+    });
+
+
+
+    function addpoint2() {
+
+        /*triangleFN(-300, -300,0,0, 300, 260, '#666', 2, arc_style[3], 1)
+        triangleFN(620, -300,320,0, 300, 260, '#666', 2, arc_style[3], -1)
+        triangleFN(-300, 800,0,480, 300, 260, '#666', 2, arc_style[3], 1)
+        triangleFN(620, 800,160,300, 260, 260, '#666', 2, arc_style[3], -1)*/
+
+        line(actor.left, actor.top, 60, 420);
+        line(actor.left, actor.top, 250, 170);
+        setTimeout(function() {
+            pointFn(60, 420, 4, 150);
+            text(120, 405, '工啊哈哈', 12, 'bold', 'left', "#13F704");
+            text(160, 440, '广州天河\nPS:今年啊哈哈销啊哈哈\n/(ㄒoㄒ)/~~', 12, 'normal', 'left', "#fff");
+        }, 500);
+        setTimeout(function() {
+            pointFn(250, 170, 3, 150);
+            text(250, 195, '啊哈哈', 12, 'bold', 'left', "#13F704");
+            text(256, 222, '啊哈哈溪\n啊哈哈州', 12, 'normal', 'left', "#fff");
+        }, 500);
+        setTimeout(function() {
+            pointFn(50, 100, 2, 150);
+            text(76, 42, '啊哈哈', 12, 'bold', 'left', "#13F704");
+            text(80, 68, '随啊哈水\n相啊哈哈', 12, 'normal', 'left', "#fff");
+        }, 1000);
+        setTimeout(function() {
+            line(actor.left, actor.top, 50, 100);
+        }, 500);
+        setTimeout(function() {
+            handFn();
+            actor.on("mousedown", scene4_init);
+        }, 2000)
+
+
+    }
+}
+
+var PolygonPoints = [{
+    x: 150,
+    y: 0
+}, {
+    x: 0,
+    y: 86
+}, {
+    x: 0,
+    y: 259
+}, {
+    x: 150,
+    y: 346
+}, {
+    x: 300,
+    y: 259
+}, {
+    x: 300,
+    y: 86
+}, ]
+
+function PolygonFN(x, y, Points, color, sWidth, sArr, scale) {
+    var Polygon = new fabric.Polygon(Points, {
+        top: y,
+        left: x,
+        fill: '',
+        strokeDashArray: sArr,
+        strokeWidth: sWidth,
+        stroke: color,
+        scaleY: scale,
+        scaleX: scale,
+        angle: -5
+    });
+
+    canvas.add(Polygon);
+    Polygon.moveTo(0);
+    return Polygon;
+}
+
+
+
+
+
+
+function scene4_init() {
+
+    canvas.clear();
+    canvas.add(actor);
+    setTimeout(scene4, 100);
+    actor.off("mousedown", scene4_init);
+}
+
+canvas.on("mouse:down", function(e) {
+    console.log(e.e.pageX + "  " + e.e.pageY)
+})
+
+function scene4() {
+    var points = [{
+        x: 82,
+        y: 138
+    }, {
+        x: 285,
+        y: 221
+    }, {
+        x: 102,
+        y: 354
+    }, {
+        x: 236,
+        y: 341
+    }, {
+        x: 32,
+        y: 252
+    }, ]
+    actor.animate({
+        'left': 160,
+        'top': 300
+    }, {
+        duration: 500,
+        onComplete: function() {
+            text2(160, 225, '那些年我们的芝麻事', 18, 'bold', 'left', "#fff");
+            setTimeout(scene4_creat, 1500);
+        },
+        easing: fabric.util.ease['easeOutBounce']
+    });
+
+    function scene4_creat() {
+        PolygonFN(160, 240, PolygonPoints, '#666', 1, arc_style[1], .85);
+        pointFn(points[0].x, points[0].y, 4, 35);
+        pointFn(points[1].x, points[1].y, 4, 35);
+        pointFn(points[2].x, points[2].y, 4, 35);
+        var point1 = new fabric.Circle({
+            top: points[3].y,
+            left: points[3].x,
+            radius: 4,
+            fill: '#666',
+            evented: false
+        });
+        var point2 = new fabric.Circle({
+            top: points[4].y,
+            left: points[4].x,
+            radius: 4,
+            fill: '#666',
+            evented: false
+        });
+        canvas.add(point1);
+        canvas.add(point2);
+
+
+        setTimeout(scene4_line, 500);
+    }
+
+    function scene4_line() {
+        for (var i = 0; i < points.length; i++) {
+            for (var j = i; j < points.length; j++) {
+                line2(points[i].x, points[i].y, points[j].x, points[j].y, true);
+            }
+        }
+        setTimeout(function() {
+            actor.animate({
+                'left': 194,
+                'top': 286
+            }, {
+                duration: 500,
+                onComplete: function() {
+                    setTimeout(function() {
+                        for (var i = 0; i < points.length; i++) {
+                            for (var j = i; j < points.length; j++) {
+                                line2(points[i].x, points[i].y, points[j].x, points[j].y);
+                            }
+                        }
+                    }, 100);
+                    setTimeout(scene4_polygon, 1500)
+                },
+                easing: fabric.util.ease['easeOutBounce']
+            });
+        }, 1500);
+        setTimeout(function() {
+            text(130, 400, '第似懂非懂\n但是品来\n我啊哈哈起', 12, 'normal', 'left', "#fff");
+        }, 500);
+        setTimeout(function() {
+            text(240, 160, '士大大夫工作\n我去是对方的方法\n你去啊哈哈坑了', 12, 'normal', 'right', "#fff");
+        }, 1000);
+        setTimeout(function() {
+            text(80, 80, '的三似的作\n不在是的公司\n但士大夫在一起', 12, 'normal', 'left', "#fff");
+        }, 500);
+    }
+
+
+    function scene4_polygon() {
+        function polygon_anim(obj, n, m) {
+            obj.setOpacity(1).setScaleX(n).setScaleY(n).animate({
+                'scaleX': m,
+                'scaleY': m,
+                'opacity': 0
+            }, {
+                duration: 1000,
+                onComplete: function() {
+                    polygon_anim(obj, n, m)
+                },
+                easing: function(t, b, c, d) {
+                    return c * t / d + b
+                }
+            });
+        }
+        var Polygon1 = PolygonFN(160, 240, PolygonPoints, '#666', 1, arc_style[1], .9);
+        polygon_anim(Polygon1, .9, 1.4);
+        setTimeout(function() {
+            var Polygon2 = PolygonFN(160, 240, PolygonPoints, '#666', 1, arc_style[1], 1.2);
+            polygon_anim(Polygon2, 1.4, 2);
+        }, 500);
+        handFn();
+        actor.on("mousedown", scene5_init);
+
+
+    }
+
+
+
+
+
+}
+
+
+function scene5_init() {
+    canvas.clear();
+    canvas.add(actor);
+    setTimeout(scene5, 100);
+    actor.off("mousedown", scene5_init);
+}
+
+function scene5() {
+    actor.animate({
+        'left': 160,
+        'top': 280
+    }, {
+        duration: 500,
+        onComplete: function() {
+            text2(160, 225, '快9点了饿了下班了!下次再弄!', 18, 'bold', 'left', "#fff");
+            setTimeout(function(){
+                text(160, 225, '啊哈哈啊哈哈', 18, 'bold', 'left', "#fff");
+            },1000);
+        },
+        easing: fabric.util.ease['easeOutBounce']
+    });
+}
+
+
+
+function pointFn(x, y, rad, size, num) {
+    var point = new fabric.Circle({
+        top: y,
+        left: x,
+        radius: rad,
+        fill: '#13F704',
+        evented: false
+    });
+    point.setRadius(0).animate({
+        'radius': rad
+    }, {
+        duration: 500,
+        onComplete: function() {
+            if (num) {
+                var num = num;
+            } else {
+                var num = rand(2, 6);
+            }
+            for (var i = 0; i < num; i++) {
+                arcFn(point.left, point.top, '#666', rand(1, 3), arc_style[rand(0, 4)], rand(10, size), arc_dir[rand(0, 2)]);
+            }
+        },
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+    canvas.add(point);
+}
+
+
+
+
+
+function text(x, y, content, size, weight, align, color) {
+
+    var text = new fabric.Text(content, {
+        left: x,
+        top: y + 10,
+        evented: false,
+        fill: color,
+        fontFamily: '微软雅黑',
+        fontSize: size,
+        fontWeight: weight,
+        textAlign: align,
+        opacity: 0
+    });
+    text.setOpacity(0).animate({
+        'opacity': 1,
+        'top': y
+    }, {
+        duration: 500,
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+
+
+    canvas.add(text)
+
+}
+
+
+
+function text2(x, y, content, size, weight, align, color) {
+
+    var text = new fabric.Text(content, {
+        left: x,
+        top: y + 30,
+        evented: false,
+        fill: color,
+        fontFamily: '微软雅黑',
+        fontSize: size,
+        fontWeight: weight,
+        textAlign: align,
+        opacity: 0
+    });
+    text.setOpacity(0).animate({
+        'opacity': 1,
+        'top': y
+    }, {
+        duration: 800,
+        onComplete: function() {
+            text.animate({
+                'opacity': 0,
+            }, {
+                duration: 800,
+                easing: function(t, b, c, d) {
+                    return c * t / d + b
+                }
+            });
+        },
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+
+
+    canvas.add(text)
+
+}
+
+
+
+
+function line(x1, y1, x2, y2) {
+    var line = new fabric.Line([x1, y1, x1, y1], {
+        fill: '',
+        evented: false,
+        stroke: '#666',
+        strokeWidth: 1,
+    });
+    line.animate({
+        'x2': x2,
+        'y2': y2
+    }, {
+        duration: 500,
+        onComplete: function() {
+
+        },
+        easing: function(t, b, c, d) {
+            return c * t / d + b
+        }
+    });
+    canvas.add(line);
+    line.moveTo(0);
+}
+
+function line2(x1, y1, x2, y2, remove) {
+    var line = new fabric.Line([x1, y1, x1, y1], {
+        fill: '',
+        evented: false,
+        stroke: '#666',
+        strokeWidth: 1,
+    });
+    var delay = rand(1, 1500);
+    setTimeout(function() {
+        line.animate({
+            'x2': x2,
+            'y2': y2
+        }, {
+            duration: 500,
+            onComplete: function() {
+                if (remove) {
+                    setTimeout(function() {
+                        line.animate({
+                            'x1': x2,
+                            'y1': y2
+                        }, {
+                            duration: 500,
+                            onComplete: function() {
+
+                            },
+                            easing: function(t, b, c, d) {
+                                return c * t / d + b
+                            }
+                        });
+                    }, 500);
+                }
+            },
+            easing: function(t, b, c, d) {
+                return c * t / d + b
+            }
+        });
+    }, delay);
+    canvas.add(line);
+    line.moveTo(0);
+}
+
+
+
+
+
+(function render() {
+    canvas.renderAll();
+    fabric.util.requestAnimFrame(render);
+})();
+</script>
+
+</html>
